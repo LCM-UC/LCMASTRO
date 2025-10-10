@@ -1,0 +1,331 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  badge?: string;
+  title: string;
+  name: string;
+  description: string;
+  avatarSrc: string;
+  avatarAlt: string;
+  primaryButtonText?: string;
+  primaryButtonHref?: string;
+  secondaryButtonText?: string;
+  secondaryButtonHref?: string;
+}
+
+const {
+  badge = "⚡ Disponible para proyectos",
+  title,
+  name,
+  description,
+  avatarSrc,
+  avatarAlt,
+  primaryButtonText = "Ver proyectos",
+  primaryButtonHref = "/proyectos",
+  secondaryButtonText = "Hablemos",
+  secondaryButtonHref = "/contacto"
+} = Astro.props;
+---
+
+<section class="hero-home">
+  <div class="container mx-auto max-w-6xl px-6">
+    
+    <!-- Badge de disponibilidad -->
+    <div 
+      class="badge-pulse badge-container"
+      role="status"
+      aria-live="polite"
+    >
+      {badge}
+    </div>
+
+    <!-- Título con Typewriter -->
+    <h1 class="hero-title">
+      <span 
+        class="gradient-text glitch typewriter-full" 
+        data-text={title}
+        id="typewriter-full"
+      >
+      </span>
+    </h1>
+
+    <p class="hero-description" id="hero-description">
+      Soy <strong class="text-[var(--color-principal)]">{name}</strong>, {description}
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-ctas" id="hero-ctas">
+      <Button 
+        href={primaryButtonHref}
+        variant="primary"
+        size="large"
+        icon="rocket"
+      >
+        {primaryButtonText}
+      </Button>
+      
+      <Button 
+        href={secondaryButtonHref}
+        variant="outline"
+        size="large"
+        icon="message"
+      >
+        {secondaryButtonText}
+      </Button>
+    </div>
+
+    <!-- Avatar con glow suave -->
+    <div class="hero-avatar" id="hero-avatar">
+      <div class="relative avatar-glitch-container" data-text={name.split(' ')[0].toUpperCase()}>
+        <img 
+          src={avatarSrc}
+          alt={avatarAlt}
+          class="avatar-image avatar-shadow-soft"
+          width="384"
+          height="384"
+          loading="eager"
+        >
+        <div class="shine-effect"></div>
+      </div>
+    </div>
+
+    <!-- Indicador de scroll -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14"/>
+        <path d="m19 12-7 7-7-7"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Typewriter Effect
+  const typewriterFull = document.getElementById('typewriter-full');
+  const heroDescription = document.getElementById('hero-description');
+  const heroCtas = document.getElementById('hero-ctas');
+  const heroAvatar = document.getElementById('hero-avatar');
+  
+  if (typewriterFull) {
+    const fullText = typewriterFull.getAttribute('data-text') || '';
+    typewriterFull.textContent = '';
+    
+    let i = 0;
+    const typeSpeed = 70;
+    
+    const typeWriter = setInterval(() => {
+      if (i < fullText.length) {
+        typewriterFull.textContent += fullText.charAt(i);
+        i++;
+      } else {
+        clearInterval(typeWriter);
+        typewriterFull.classList.add('typewriter-done');
+        
+        setTimeout(() => {
+          if (heroDescription) heroDescription.style.opacity = '1';
+        }, 300);
+        
+        setTimeout(() => {
+          if (heroCtas) heroCtas.style.opacity = '1';
+        }, 600);
+        
+        setTimeout(() => {
+          if (heroAvatar) heroAvatar.style.opacity = '1';
+        }, 900);
+      }
+    }, typeSpeed);
+  }
+</script>
+
+<style>
+  .hero-home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .badge-container {
+    display: inline-block;
+    border: 1px solid rgba(34, 80, 52, 0.4);
+    background-color: rgba(34, 80, 52, 0.05);
+    color: var(--color-secundario);
+    font-size: 1rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0;
+    letter-spacing: 0.05em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.2s forwards;
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+    min-height: 4.5rem;
+  }
+
+  .typewriter-full {
+    display: inline-block;
+    white-space: normal;
+    max-width: 100%;
+    border-right: 3px solid var(--color-rojo);
+    padding-right: 0.25rem;
+    animation: blink 0.75s step-end infinite;
+  }
+
+  .typewriter-done {
+    border-right: none;
+    animation: none;
+  }
+
+  @keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--color-rojo); }
+  }
+
+  .hero-description {
+    color: var(--color-texto);
+    font-size: 1.25rem;
+    max-width: 48rem;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .hero-avatar {
+    display: flex;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+
+  .avatar-image {
+    width: 16rem;
+    height: 16rem;
+    border: 4px solid var(--color-acento);
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  .avatar-glitch-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-glitch-container:hover::before,
+  .avatar-glitch-container:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--color-principal);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .avatar-glitch-container:hover::before {
+    animation: glitch-1 0.3s infinite;
+    color: var(--color-rojo);
+  }
+
+  .avatar-glitch-container:hover::after {
+    animation: glitch-2 0.3s infinite;
+    color: #0ff;
+  }
+
+  .shine-effect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(176, 224, 168, 0.15), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    pointer-events: none;
+  }
+
+  .avatar-glitch-container:hover .shine-effect {
+    left: 100%;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    color: var(--color-principal);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .badge-container {
+      font-size: 1.125rem;
+    }
+
+    .hero-title {
+      font-size: 4.5rem;
+      min-height: 6rem;
+    }
+
+    .hero-description {
+      font-size: 1.5rem;
+    }
+
+    .avatar-image {
+      width: 20rem;
+      height: 20rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: 6rem;
+      min-height: 8rem;
+    }
+
+    .avatar-image {
+      width: 24rem;
+      height: 24rem;
+    }
+  }
+</style>

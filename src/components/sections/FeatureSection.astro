@@ -1,0 +1,313 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  tags: string[];
+  linkText: string;
+  linkHref: string;
+  reverse?: boolean;
+  glitchText?: string;
+  gradientClass?: 'web' | 'programming' | 'ai';
+}
+
+const {
+  title,
+  description,
+  imageSrc,
+  imageAlt,
+  tags,
+  linkText,
+  linkHref,
+  reverse = false,
+  glitchText = title.substring(0, 3).toUpperCase(),
+  gradientClass = 'web'
+} = Astro.props;
+
+const gradientClasses = {
+  web: 'bg-gradient-web',
+  programming: 'bg-gradient-programming',
+  ai: 'bg-gradient-ai'
+};
+
+const blobClasses = {
+  web: ['blob-1', 'blob-2'],
+  programming: ['blob-3', 'blob-4'],
+  ai: ['blob-5', 'blob-6']
+};
+---
+
+<section class="feature-section scroll-reveal">
+  <div class="container mx-auto max-w-7xl px-6">
+    <div class="feature-grid">
+      
+      <!-- Imagen -->
+      <div class={`feature-image-wrapper ${reverse ? 'order-2' : ''}`}>
+        <div class={`feature-image-box ${gradientClasses[gradientClass]} image-glitch-container`} data-text={glitchText}>
+          <img 
+            src={imageSrc}
+            alt={imageAlt}
+            class="feature-image"
+            loading="lazy"
+          >
+          <div class="shine-effect"></div>
+        </div>
+        
+        <!-- Decoración -->
+        {blobClasses[gradientClass].map((blobClass) => (
+          <div class={`decoration-blob ${blobClass}`}></div>
+        ))}
+      </div>
+
+      <!-- Contenido -->
+      <div class={`feature-content ${reverse ? 'order-1' : ''}`}>
+        <h2 class="feature-title gradient-text">
+          {title}
+        </h2>
+        <p class="feature-description">
+          {description}
+        </p>
+        
+        <!-- Tags -->
+        <div class="feature-tags">
+          {tags.map(tag => (
+            <span class="tech-tag">{tag}</span>
+          ))}
+        </div>
+
+        <a href={linkHref} class="feature-link">
+          <span>{linkText}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-arrow">
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 5rem 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .feature-grid {
+    display: grid;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .feature-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .feature-title {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  .feature-description {
+    color: var(--color-texto);
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  .feature-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-principal);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .feature-link:hover {
+    color: var(--color-rojo);
+  }
+
+  .link-arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .feature-link:hover .link-arrow {
+    transform: translateX(0.25rem);
+  }
+
+  .feature-image-wrapper {
+    position: relative;
+  }
+
+  .feature-image-box {
+    aspect-ratio: 1;
+    border-radius: 0;
+    overflow: hidden;
+    border: 1px solid rgba(176, 224, 168, 0.3);
+    position: relative;
+  }
+
+  .image-glitch-container:hover::before,
+  .image-glitch-container:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--color-principal);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .image-glitch-container:hover::before {
+    animation: glitch-1 0.3s infinite;
+    color: var(--color-rojo);
+  }
+
+  .image-glitch-container:hover::after {
+    animation: glitch-2 0.3s infinite;
+    color: #0ff;
+  }
+
+  .feature-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bg-gradient-web {
+    background: linear-gradient(135deg, rgba(176, 224, 168, 0.2), rgba(34, 80, 52, 0.2));
+  }
+
+  .bg-gradient-programming {
+    background: linear-gradient(135deg, rgba(154, 230, 180, 0.2), rgba(106, 196, 149, 0.2));
+  }
+
+  .bg-gradient-ai {
+    background: linear-gradient(135deg, rgba(106, 196, 149, 0.2), rgba(255, 0, 0, 0.1));
+  }
+
+  .shine-effect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(176, 224, 168, 0.15), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    pointer-events: none;
+  }
+
+  .image-glitch-container:hover .shine-effect {
+    left: 100%;
+  }
+
+  .decoration-blob {
+    position: absolute;
+    filter: blur(3rem);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .blob-1 {
+    top: -2rem;
+    right: -2rem;
+    width: 8rem;
+    height: 8rem;
+    background-color: rgba(176, 224, 168, 0.1);
+  }
+
+  .blob-2 {
+    bottom: -2rem;
+    left: -2rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgba(154, 230, 180, 0.1);
+  }
+
+  .blob-3 {
+    top: -2rem;
+    left: -2rem;
+    width: 8rem;
+    height: 8rem;
+    background-color: rgba(154, 230, 180, 0.1);
+  }
+
+  .blob-4 {
+    bottom: -2rem;
+    right: -2rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgba(176, 224, 168, 0.1);
+  }
+
+  .blob-5 {
+    top: -2rem;
+    right: -2rem;
+    width: 10rem;
+    height: 10rem;
+    background-color: rgba(255, 0, 0, 0.1);
+  }
+
+  .blob-6 {
+    bottom: -2rem;
+    left: -2rem;
+    width: 8rem;
+    height: 8rem;
+    background-color: rgba(106, 196, 149, 0.1);
+  }
+
+  @media (min-width: 768px) {
+    .feature-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-content {
+      text-align: left;
+    }
+
+    .order-1 {
+      order: 1;
+    }
+
+    .order-2 {
+      order: 2;
+    }
+
+    .feature-title {
+      font-size: 4rem;
+    }
+
+    .feature-description {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .feature-title {
+      font-size: 4.5rem;
+    }
+  }
+</style>
