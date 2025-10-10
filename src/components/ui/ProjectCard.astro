@@ -1,0 +1,330 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  id: number;
+  titulo: string;
+  subtitulo: string;
+  descripcion: string;
+  imagen: string;
+  tags: string[];
+  categoria: string;
+  año: string;
+  reverse?: boolean;
+  demoUrl?: string;
+  repoUrl?: string;
+}
+
+const {
+  id,
+  titulo,
+  subtitulo,
+  descripcion,
+  imagen,
+  tags,
+  categoria,
+  año,
+  reverse = false,
+  demoUrl = '#',
+  repoUrl = '#'
+} = Astro.props;
+---
+
+<section class="project-fullscreen scroll-reveal">
+  <div class="container mx-auto max-w-7xl px-6">
+    <div class={`project-layout ${reverse ? 'layout-reverse' : 'layout-normal'}`}>
+      
+      <!-- IMAGEN -->
+      <div class="project-image-container">
+        <div class="project-image-box image-glitch-container" data-text={titulo.split(' ')[0].toUpperCase()}>
+          <img 
+            src={imagen} 
+            alt={titulo}
+            class="project-image"
+            loading="lazy"
+          >
+          <div class="shine-effect"></div>
+          <div class="project-decoration-number">
+            {String(id).padStart(2, '0')}
+          </div>
+        </div>
+        <div class={`decoration-blob blob-${id}`}></div>
+      </div>
+
+      <!-- CONTENIDO -->
+      <div class="project-content-container">
+        <div class="project-metadata">
+          <span class="project-year">{año}</span>
+          <span class="metadata-divider">/</span>
+          <span class="project-category">{categoria}</span>
+        </div>
+
+        <h2 class="project-title-main gradient-text">
+          {titulo}
+        </h2>
+
+        <h3 class="project-subtitle">
+          {subtitulo}
+        </h3>
+
+        <p class="project-description-long">
+          {descripcion}
+        </p>
+
+        <div class="project-tech-tags">
+          {tags.map(tag => (
+            <span class="tech-tag">{tag}</span>
+          ))}
+        </div>
+
+        <div class="project-links">
+          <Button 
+            href={demoUrl}
+            variant="primary"
+            icon="external"
+            class="btn-primary"
+          >
+            Ver proyecto
+          </Button>
+          
+          <Button 
+            href={repoUrl}
+            variant="outline"
+            icon="github"
+            class="btn-secondary"
+          >
+            Ver código
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-fullscreen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 5rem 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .project-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project-metadata {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-texto);
+    font-family: 'Courier New', monospace;
+  }
+
+  .metadata-divider {
+    color: var(--color-principal);
+  }
+
+  .project-year,
+  .project-category {
+    color: var(--color-principal);
+  }
+
+  .project-title-main {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .project-subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-secundario);
+    margin: 0;
+  }
+
+  .project-description-long {
+    color: var(--color-texto);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    max-width: 42rem;
+  }
+
+  .project-tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn-primary {
+    color: black;
+    background-color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+    border-radius: 0;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-rojo);
+    border-color: var(--color-rojo);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+  }
+
+  .btn-secondary {
+    color: var(--color-principal);
+    background-color: transparent;
+    border: 2px solid var(--color-principal);
+    border-radius: 9999px;
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-rojo);
+    border-color: var(--color-rojo);
+    color: white;
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 768px) {
+    .project-layout {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5rem;
+    }
+
+    .layout-reverse {
+      direction: rtl;
+    }
+
+    .layout-reverse > * {
+      direction: ltr;
+    }
+
+    .project-title-main {
+      font-size: 3rem;
+    }
+
+    .project-subtitle {
+      font-size: 1.75rem;
+    }
+
+    .project-description-long {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-title-main {
+      font-size: 3.5rem;
+    }
+  }
+
+  .project-layout {
+    display: grid;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .project-image-container {
+    position: relative;
+  }
+
+  .project-image-box {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid rgba(176, 224, 168, 0.3);
+    position: relative;
+    background: linear-gradient(135deg, rgba(176, 224, 168, 0.1), rgba(34, 80, 52, 0.1));
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .project-image-box:hover .project-image {
+    transform: scale(1.05);
+  }
+
+  .image-glitch-container:hover::before,
+  .image-glitch-container:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--color-principal);
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .image-glitch-container:hover::before {
+    animation: glitch-1 0.3s infinite;
+    color: var(--color-rojo);
+  }
+
+  .image-glitch-container:hover::after {
+    animation: glitch-2 0.3s infinite;
+    color: #0ff;
+  }
+
+  .shine-effect {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(176, 224, 168, 0.15), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s;
+    pointer-events: none;
+  }
+
+  .image-glitch-container:hover .shine-effect {
+    left: 100%;
+  }
+
+  .project-decoration-number {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 6rem;
+    font-weight: 900;
+    color: rgba(176, 224, 168, 0.1);
+    font-family: 'Courier New', monospace;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .decoration-blob {
+    position: absolute;
+    filter: blur(3rem);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .blob-1 { top: -3rem; right: -3rem; width: 12rem; height: 12rem; background-color: rgba(176, 224, 168, 0.1); }
+  .blob-2 { bottom: -3rem; left: -3rem; width: 14rem; height: 14rem; background-color: rgba(154, 230, 180, 0.1); }
+  .blob-3 { top: -3rem; left: -3rem; width: 12rem; height: 12rem; background-color: rgba(255, 0, 0, 0.08); }
+  .blob-4 { bottom: -3rem; right: -3rem; width: 14rem; height: 14rem; background-color: rgba(106, 196, 149, 0.1); }
+  .blob-5 { top: -3rem; right: -3rem; width: 12rem; height: 12rem; background-color: rgba(176, 224, 168, 0.1); }
+</style>

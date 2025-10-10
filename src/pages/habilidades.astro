@@ -1,0 +1,399 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Particles from "../components/effects/Particles.astro";
+import Hero from "../components/sections/Hero.astro";
+import TimelineItem from "../components/ui/TimeLineItem.astro";
+import SkillBar from "../components/ui/SkillBar.astro";
+import Button from "../components/ui/Button.astro";
+import CTA from "../components/sections/CTA.astro";
+
+const experiencia = [
+  {
+    periodo: "2023 — Presente",
+    titulo: "Estudiante de Ingeniería de Sistemas",
+    institucion: "Universidad Continental",
+    descripcion: "Cursando la carrera de Ingeniería de Sistemas e Informática, enfocándome en desarrollo web, programación orientada a objetos, estructuras de datos y diseño de sistemas. Participación activa en proyectos académicos y personales que aplican conocimientos teóricos a soluciones prácticas.",
+    logros: [
+      "Desarrollo de proyectos web con tecnologías modernas",
+      "Implementación de aplicaciones con Python, Java y JavaScript",
+      "Diseño de bases de datos relacionales con SQL y Oracle",
+      "Creación de interfaces responsivas y accesibles"
+    ],
+    techs: ["Python", "Java", "JavaScript", "SQL", "HTML/CSS"]
+  },
+  {
+    periodo: "2024",
+    titulo: "Desarrollador Web Freelance",
+    institucion: "Proyectos independientes",
+    descripcion: "Diseño y desarrollo de sitios web para pequeñas empresas y emprendimientos locales. Creación de experiencias digitales modernas, optimizadas y responsivas que priorizan la experiencia del usuario y el rendimiento.",
+    logros: [
+      "Landing pages para negocios locales",
+      "Dashboards interactivos con APIs",
+      "Aplicaciones web full-stack con Python",
+      "Prototipos de aplicaciones móviles en Figma"
+    ],
+    techs: ["HTML", "CSS", "JavaScript", "Python", "Figma"]
+  }
+];
+
+const habilidades = {
+  "Frontend": [
+    { nombre: "HTML5", nivel: 95 },
+    { nombre: "CSS3", nivel: 90 },
+    { nombre: "JavaScript", nivel: 85 },
+    { nombre: "Tailwind CSS", nivel: 85 },
+    { nombre: "Astro", nivel: 75 },
+    { nombre: "Bootstrap", nivel: 80 }
+  ],
+  "Backend": [
+    { nombre: "Python", nivel: 80 },
+    { nombre: "Java", nivel: 70 },
+    { nombre: "C++", nivel: 65 },
+    { nombre: "SQL", nivel: 75 },
+    { nombre: "Oracle DB", nivel: 70 }
+  ],
+  "Herramientas & Diseño": [
+    { nombre: "Git & GitHub", nivel: 80 },
+    { nombre: "VS Code", nivel: 90 },
+    { nombre: "Figma", nivel: 75 },
+    { nombre: "AppInventor", nivel: 70 },
+    { nombre: "Firebase", nivel: 65 }
+  ]
+};
+
+const certificaciones = [
+  {
+    nombre: "Desarrollo Web Full Stack",
+    institucion: "Autodidacta",
+    año: "2024",
+    descripcion: "Aprendizaje continuo de tecnologías web modernas"
+  },
+  {
+    nombre: "Estructuras de Datos y Algoritmos",
+    institucion: "Universidad Continental",
+    año: "2023",
+    descripcion: "Implementación de algoritmos eficientes en C++ y Java"
+  }
+];
+---
+
+<Layout 
+  title="Habilidades | Portafolio LCM"
+  description="Experiencia, educación y habilidades técnicas de Leonardo Canorio. Desarrollador web con conocimientos en Python, JavaScript, SQL y diseño UX/UI."
+>
+  <Particles />
+
+  <Hero 
+    title="Experiencia & Habilidades"
+    description="Estudiante de Ingeniería de Sistemas apasionado por crear experiencias digitales innovadoras. Mi enfoque combina conocimientos técnicos sólidos con creatividad para desarrollar soluciones que no solo funcionen bien, sino que también se vean increíbles."
+  />
+
+  <section class="cv-content-section">
+    <div class="container mx-auto max-w-6xl px-6">
+      <div class="cv-grid">
+        
+        <!-- COLUMNA PRINCIPAL -->
+        <div class="cv-main-column">
+          
+          <!-- SOBRE MÍ -->
+          <div class="cv-section scroll-reveal">
+            <h2 class="section-title-cv gradient-text">Sobre mí</h2>
+            <div class="about-content">
+              <p>
+                Soy estudiante de Ingeniería de Sistemas en la Universidad Continental, donde he desarrollado 
+                una sólida base en programación, desarrollo web y diseño de sistemas. Mi pasión por la tecnología 
+                me impulsa a aprender constantemente y a buscar nuevos desafíos.
+              </p>
+              <p>
+                Me especializo en el desarrollo frontend con HTML, CSS y JavaScript, pero también tengo experiencia 
+                en backend con Python y Java. Disfruto crear interfaces intuitivas y funcionales que resuelvan 
+                problemas reales.
+              </p>
+              <p>
+                Cuando no estoy programando, me encontrarás explorando nuevas tecnologías.
+              </p>
+            </div>
+          </div>
+
+          <!-- EXPERIENCIA -->
+          <div class="cv-section scroll-reveal">
+            <h2 class="section-title-cv gradient-text">Experiencia</h2>
+            <div class="timeline">
+              {experiencia.map((exp, index) => (
+                <TimelineItem 
+                  {...exp} 
+                  isLast={index === experiencia.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+
+          <!-- EDUCACIÓN & CERTIFICACIONES -->
+          <div class="cv-section scroll-reveal">
+            <h2 class="section-title-cv gradient-text">Educación & Formación</h2>
+            <div class="education-grid">
+              {certificaciones.map((cert) => (
+                <div class="education-card">
+                  <div class="education-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                      <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                    </svg>
+                  </div>
+                  <div class="education-content">
+                    <h3 class="education-title">{cert.nombre}</h3>
+                    <p class="education-institution">{cert.institucion}</p>
+                    <p class="education-year">{cert.año}</p>
+                    <p class="education-description">{cert.descripcion}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMNA LATERAL -->
+        <aside class="cv-sidebar">
+          
+          <!-- HABILIDADES TÉCNICAS -->
+          <div class="cv-section scroll-reveal">
+            <h2 class="section-title-cv gradient-text">Habilidades Técnicas</h2>
+            
+            {Object.entries(habilidades).map(([categoria, skills]) => (
+              <div class="skills-category">
+                <h3 class="skills-category-title">{categoria}</h3>
+                <div class="skills-list">
+                  {skills.map((skill) => (
+                    <SkillBar nombre={skill.nombre} nivel={skill.nivel} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- DESCARGA CV -->
+          <div class="cv-section scroll-reveal">
+            <div class="download-cv-card">
+              <div class="download-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7 10 12 15 17 10"/>
+                  <line x1="12" x2="12" y1="15" y2="3"/>
+                </svg>
+              </div>
+              <h3 class="download-title">Descargar CV</h3>
+              <p class="download-description">
+                Obtén una copia en PDF de mi currículum vitae completo
+              </p>
+              <Button 
+                href="/cv-leonardo-canorio.pdf"
+                variant="primary"
+                icon="download"
+              >
+                Descargar PDF
+              </Button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <CTA 
+    title="¿Buscas un desarrollador comprometido?"
+    description="Estoy disponible para colaborar en proyectos web, desarrollo de software y diseño de aplicaciones. Siempre dispuesto a aprender y aportar valor a tu equipo."
+    buttonText="Contactar"
+    buttonHref="/contacto"
+    buttonIcon="message"
+    secondaryButtonText="Ver proyectos"
+    secondaryButtonHref="/proyectos"
+    secondaryButtonIcon="rocket"
+  />
+</Layout>
+
+<style>
+  .cv-content-section {
+    padding: 3rem 0 5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .cv-grid {
+    display: grid;
+    gap: 4rem;
+  }
+
+  .cv-section {
+    margin-bottom: 4rem;
+  }
+
+  .section-title-cv {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+
+  .about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-content p {
+    color: var(--color-texto);
+    font-size: 1.125rem;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+      180deg,
+      var(--color-principal),
+      var(--color-secundario),
+      var(--color-rojo)
+    );
+  }
+
+  .education-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .education-card {
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem;
+    background-color: rgba(0, 21, 15, 0.3);
+    border: 1px solid rgba(176, 224, 168, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .education-card:hover {
+    border-color: var(--color-principal);
+    transform: translateX(4px);
+  }
+
+  .education-icon {
+    flex-shrink: 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(176, 224, 168, 0.1);
+    border: 1px solid rgba(176, 224, 168, 0.3);
+    color: var(--color-principal);
+  }
+
+  .education-content {
+    flex: 1;
+  }
+
+  .education-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.5rem;
+  }
+
+  .education-institution {
+    color: var(--color-secundario);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .education-year {
+    color: var(--color-principal);
+    font-size: 0.875rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    margin: 0.5rem 0;
+  }
+
+  .education-description {
+    color: var(--color-texto);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.75rem 0 0;
+  }
+
+  .skills-category {
+    margin-bottom: 2.5rem;
+  }
+
+  .skills-category-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-secundario);
+    margin-bottom: 1rem;
+  }
+
+  .skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .download-cv-card {
+    padding: 2.5rem;
+    background-color: rgba(0, 21, 15, 0.3);
+    border: 1px solid rgba(176, 224, 168, 0.2);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .download-cv-card:hover {
+    border-color: var(--color-principal);
+  }
+
+  .download-icon {
+    margin: 0 auto 1.5rem;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-principal);
+  }
+
+  .download-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 1rem;
+  }
+
+  .download-description {
+    color: var(--color-texto);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    .cv-grid {
+      grid-template-columns: 2fr 1fr;
+      gap: 5rem;
+    }
+
+    .cv-sidebar {
+      position: sticky;
+      top: 7rem;
+      align-self: start;
+    }
+  }
+</style>

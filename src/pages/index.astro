@@ -1,11 +1,808 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout 
+  title="Inicio | Portafolio LCM"
+  description="Leonardo Canorio - Estudiante de Ingeniería de Sistemas e Informática. Desarrollo web moderno con Astro, Tailwind y JavaScript."
+>
+  <!-- Partículas flotantes de fondo -->
+  <div class="particles" id="particles"></div>
+
+  <!-- HERO SECTION - Fullscreen -->
+  <section class="hero-section">
+    <div class="container mx-auto max-w-6xl px-6">
+      
+      <!-- Badge de disponibilidad -->
+      <div 
+        class="badge-pulse badge-container"
+        role="status"
+        aria-live="polite"
+      >
+        <span aria-label="Disponible">⚡</span> Disponible para proyectos
+      </div>
+
+      <!-- Título con Typewriter -->
+      <h1 class="hero-title">
+        <span 
+          class="gradient-text glitch typewriter-full" 
+          data-text="Ingeniería al servicio de la innovación digital"
+          id="typewriter-full"
+        >
+        </span>
+      </h1>
+
+      <p class="hero-description" id="hero-description">
+        Soy <strong class="text-[var(--color-principal)]">Leonardo Canorio</strong>, estudiante de Ing. de Sistemas e Informática.
+        Creo experiencias web modernas, rápidas y funcionales con buenas prácticas y herramientas actuales.
+      </p>
+
+      <!-- CTAs -->
+      <div class="hero-ctas" id="hero-ctas">
+        <a 
+          href="/proyectos" 
+          class="btn-em"
+          aria-label="Ver mis proyectos"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+          </svg>
+          <span>Ver proyectos</span>
+        </a>
+        <a 
+          href="/contacto" 
+          class="btn-outline-em"
+          aria-label="Contactar"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+          </svg>
+          <span>Hablemos</span>
+        </a>
+      </div>
+
+      <!-- Avatar con glow suave -->
+      <div class="hero-avatar" id="hero-avatar">
+        <div class="relative avatar-glitch-container" data-text="LEONARDO">
+          <img 
+            src="/img/leo.jpg" 
+            alt="Leonardo Canorio - Estudiante de Ingeniería de Sistemas"
+            class="avatar-image avatar-shadow-soft"
+            width="384"
+            height="384"
+            loading="eager"
+          >
+          <!-- Shine effect -->
+          <div class="shine-effect"></div>
+        </div>
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--color-principal)]">
+          <path d="M12 5v14"/>
+          <path d="m19 12-7 7-7-7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DESARROLLO WEB -->
+  <section class="content-section scroll-reveal">
+    <div class="container mx-auto max-w-7xl px-6">
+      <div class="content-grid">
+        
+        <!-- Imagen con Glitch y Shine -->
+        <div class="content-image-wrapper order-2">
+          <div class="content-image-box bg-gradient-web image-glitch-container" data-text="WEB">
+            <img 
+              src="/img/DesarrolloWeb.jpg" 
+              alt="Desarrollo Web"
+              class="content-image-full"
+              loading="lazy"
+            >
+            <!-- Shine effect -->
+            <div class="shine-effect"></div>
+          </div>
+          <!-- Decoración -->
+          <div class="decoration-blob blob-1"></div>
+          <div class="decoration-blob blob-2"></div>
+        </div>
+
+        <!-- Contenido  -->
+        <div class="content-text-wrapper order-1">
+          <h2 class="section-title gradient-text">
+            Desarrollo Web
+          </h2>
+          <p class="section-description">
+            Creación de sitios web modernos, responsivos y optimizados con HTML, CSS, JavaScript y frameworks como Tailwind y Astro. Cada proyecto es una experiencia única diseñada para impactar.
+          </p>
+          
+          <!-- Tags con hover rojo -->
+          <div class="tags-container">
+            <span class="tech-tag">HTML/CSS</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Astro</span>
+            <span class="tech-tag">Tailwind</span>
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">TypeScript</span>
+          </div>
+
+          <a 
+            href="/proyectos" 
+            class="section-link"
+          >
+            <span>Ver proyectos web</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-arrow">
+              <path d="M5 12h14"/>
+              <path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PROGRAMACIÓN -->
+  <section class="content-section scroll-reveal">
+    <div class="container mx-auto max-w-7xl px-6">
+      <div class="content-grid">
+        
+        <!-- Contenido  -->
+        <div class="content-text-wrapper">
+          <h2 class="section-title gradient-text">
+            Programación
+          </h2>
+          <p class="section-description">
+            Dominio de lenguajes como Python, C++ y Java, aplicados en proyectos de software, algoritmos y automatización. Soluciones eficientes para problemas complejos.
+          </p>
+          
+          <!-- Tags -->
+          <div class="tags-container">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">C++</span>
+            <span class="tech-tag">Java</span>
+            <span class="tech-tag">Git</span>
+            <span class="tech-tag">Algoritmos</span>
+            <span class="tech-tag">POO</span>
+          </div>
+
+          <a 
+            href="/habilidades" 
+            class="section-link"
+          >
+            <span>Ver habilidades técnicas</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-arrow">
+              <path d="M5 12h14"/>
+              <path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Imagen con Glitch y Shine -->
+        <div class="content-image-wrapper">
+          <div class="content-image-box bg-gradient-programming image-glitch-container" data-text="CODE">
+            <img 
+              src="/img/Programacion.jpg" 
+              alt="Programación"
+              class="content-image-full"
+              loading="lazy"
+            >
+            <!-- Shine effect -->
+            <div class="shine-effect"></div>
+          </div>
+          <!-- Decoración -->
+          <div class="decoration-blob blob-3"></div>
+          <div class="decoration-blob blob-4"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN INTELIGENCIA ARTIFICIAL -->
+  <section class="content-section scroll-reveal">
+    <div class="container mx-auto max-w-7xl px-6">
+      <div class="content-grid">
+        
+        <!-- Imagen con Glitch y Shine -->
+        <div class="content-image-wrapper order-2">
+          <div class="content-image-box bg-gradient-ai image-glitch-container" data-text="AI">
+            <img 
+              src="/img/InteligenciaArtificial.jpg" 
+              alt="Inteligencia Artificial"
+              class="content-image-full"
+              loading="lazy"
+            >
+            <!-- Shine effect -->
+            <div class="shine-effect"></div>
+          </div>
+          <!-- Decoración -->
+          <div class="decoration-blob blob-5"></div>
+          <div class="decoration-blob blob-6"></div>
+        </div>
+
+        <!-- Contenido  -->
+        <div class="content-text-wrapper order-1">
+          <h2 class="section-title gradient-text">
+            Inteligencia Artificial
+          </h2>
+          <p class="section-description">
+            Aplicaciones de IA en áreas como reconocimiento de patrones, machine learning y análisis de datos. Transformando datos en decisiones inteligentes.
+          </p>
+          
+          <!-- Tags -->
+          <div class="tags-container">
+            <span class="tech-tag">Machine Learning</span>
+            <span class="tech-tag">Data Science</span>
+            <span class="tech-tag">Análisis</span>
+            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">Pandas</span>
+            <span class="tech-tag">NumPy</span>
+          </div>
+
+          <a 
+            href="/proyectos" 
+            class="section-link"
+          >
+            <span>Ver proyectos de IA</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="link-arrow">
+              <path d="M5 12h14"/>
+              <path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN CTA FINAL -->
+  <section class="cta-section scroll-reveal">
+    <div class="container mx-auto max-w-4xl text-center px-6">
+      <h2 class="cta-title gradient-text">
+        ¿Listo para crear algo increíble?
+      </h2>
+      <p class="cta-description">
+        Colaboremos en tu próximo proyecto. Estoy disponible para freelance, pasantías y proyectos académicos.
+      </p>
+      
+      <a 
+        href="/contacto" 
+        class="btn-em btn-large"
+        aria-label="Iniciar conversación"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+        </svg>
+        <span>Iniciar conversación</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script>
+    // ===== PARTÍCULAS =====
+    const particlesContainer = document.getElementById('particles');
+    if (particlesContainer) {
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        
+        const size = Math.random() * 3 + 1;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // ===== TYPEWRITER EFFECT COMPLETO =====
+    const typewriterFull = document.getElementById('typewriter-full');
+    const heroDescription = document.getElementById('hero-description');
+    const heroCtas = document.getElementById('hero-ctas');
+    const heroAvatar = document.getElementById('hero-avatar');
+    
+    if (typewriterFull) {
+      const fullText = 'Ingeniería al servicio de la innovación digital';
+      typewriterFull.textContent = '';
+      
+      let i = 0;
+      const typeSpeed = 70; // Velocidad de tipeo
+      
+      const typeWriter = setInterval(() => {
+        if (i < fullText.length) {
+          typewriterFull.textContent += fullText.charAt(i);
+          i++;
+        } else {
+          clearInterval(typeWriter);
+          typewriterFull.classList.add('typewriter-done');
+          
+          // Mostrar elementos siguientes
+          setTimeout(() => {
+            if (heroDescription) {
+              heroDescription.style.opacity = '1';
+            }
+          }, 300);
+          
+          setTimeout(() => {
+            if (heroCtas) {
+              heroCtas.style.opacity = '1';
+            }
+          }, 600);
+          
+          setTimeout(() => {
+            if (heroAvatar) {
+              heroAvatar.style.opacity = '1';
+            }
+          }, 900);
+        }
+      }, typeSpeed);
+    }
+
+    // ===== SCROLL REVEAL =====
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+  <style>
+    /* === HERO SECTION === */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .badge-container {
+      display: inline-block;
+      border: 1px solid rgba(34, 80, 52, 0.4);
+      background-color: rgba(34, 80, 52, 0.05);
+      color: var(--color-secundario);
+      font-size: 1rem;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0; 
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 0.2s forwards;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 2rem;
+      min-height: 4.5rem; 
+    }
+
+    /* Typewriter  */
+    .typewriter-full {
+      display: inline-block;
+      white-space: normal; 
+      max-width: 100%;
+      border-right: 3px solid var(--color-rojo);
+      padding-right: 0.25rem;
+      animation: blink 0.75s step-end infinite;
+    }
+
+    .typewriter-done {
+      border-right: none;
+      animation: none;
+    }
+
+    .hero-description {
+      color: var(--color-texto);
+      font-size: 1.25rem;
+      max-width: 48rem;
+      margin: 0 auto 3rem;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 4rem;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .hero-avatar {
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .avatar-image {
+      width: 16rem;
+      height: 16rem;
+      border: 4px solid var(--color-acento);
+      object-fit: cover;
+      border-radius: 0; 
+    }
+
+    /* Avatar con Glitch Effect */
+    .avatar-glitch-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-glitch-container:hover::before,
+    .avatar-glitch-container:hover::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--color-principal);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .avatar-glitch-container:hover::before {
+      animation: glitch-1 0.3s infinite;
+      color: var(--color-rojo);
+    }
+
+    .avatar-glitch-container:hover::after {
+      animation: glitch-2 0.3s infinite;
+      color: #0ff;
+    }
+
+    /* Shine Effect */
+    .shine-effect {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(176, 224, 168, 0.15),
+        transparent
+      );
+      transform: rotate(45deg);
+      transition: all 0.6s;
+      pointer-events: none;
+    }
+
+    .avatar-glitch-container:hover .shine-effect,
+    .image-glitch-container:hover .shine-effect {
+      left: 100%;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+
+    /* === CONTENT SECTIONS === */
+    .content-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 5rem 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .content-grid {
+      display: grid;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .content-text-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .section-description {
+      color: var(--color-texto);
+      font-size: 1.25rem;
+      line-height: 1.6;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding-top: 1rem;
+    }
+
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-principal);
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .section-link:hover {
+      color: var(--color-rojo);
+    }
+
+    .link-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .section-link:hover .link-arrow {
+      transform: translateX(0.25rem);
+    }
+
+    .content-image-wrapper {
+      position: relative;
+    }
+
+    .content-image-box {
+      aspect-ratio: 1;
+      border-radius: 0; 
+      overflow: hidden;
+      border: 1px solid rgba(176, 224, 168, 0.3);
+      position: relative;
+    }
+
+    /* Imagen glitch container */
+    .image-glitch-container {
+      position: relative;
+    }
+
+    .image-glitch-container:hover::before,
+    .image-glitch-container:hover::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 6rem;
+      font-weight: 900;
+      color: var(--color-principal);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .image-glitch-container:hover::before {
+      animation: glitch-1 0.3s infinite;
+      color: var(--color-rojo);
+    }
+
+    .image-glitch-container:hover::after {
+      animation: glitch-2 0.3s infinite;
+      color: #0ff;
+    }
+
+    .content-image-full {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bg-gradient-web {
+      background: linear-gradient(135deg, rgba(176, 224, 168, 0.2), rgba(34, 80, 52, 0.2));
+    }
+
+    .bg-gradient-programming {
+      background: linear-gradient(135deg, rgba(154, 230, 180, 0.2), rgba(106, 196, 149, 0.2));
+    }
+
+    .bg-gradient-ai {
+      background: linear-gradient(135deg, rgba(106, 196, 149, 0.2), rgba(255, 0, 0, 0.1));
+    }
+
+    .decoration-blob {
+      position: absolute;
+      filter: blur(3rem);
+      border-radius: 0; 
+    }
+
+    .blob-1 {
+      top: -2rem;
+      right: -2rem;
+      width: 8rem;
+      height: 8rem;
+      background-color: rgba(176, 224, 168, 0.1);
+    }
+
+    .blob-2 {
+      bottom: -2rem;
+      left: -2rem;
+      width: 10rem;
+      height: 10rem;
+      background-color: rgba(154, 230, 180, 0.1);
+    }
+
+    .blob-3 {
+      top: -2rem;
+      left: -2rem;
+      width: 8rem;
+      height: 8rem;
+      background-color: rgba(154, 230, 180, 0.1);
+    }
+
+    .blob-4 {
+      bottom: -2rem;
+      right: -2rem;
+      width: 10rem;
+      height: 10rem;
+      background-color: rgba(176, 224, 168, 0.1);
+    }
+
+    .blob-5 {
+      top: -2rem;
+      right: -2rem;
+      width: 10rem;
+      height: 10rem;
+      background-color: rgba(255, 0, 0, 0.1);
+    }
+
+    .blob-6 {
+      bottom: -2rem;
+      left: -2rem;
+      width: 8rem;
+      height: 8rem;
+      background-color: rgba(106, 196, 149, 0.1);
+    }
+
+    /* === CTA SECTION === */
+    .cta-section {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .cta-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+
+    .cta-description {
+      color: var(--color-texto);
+      font-size: 1.25rem;
+      line-height: 1.6;
+      margin-bottom: 3rem;
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-large {
+      font-size: 1.25rem;
+      padding: 1rem 2.5rem;
+    }
+
+    /* === RESPONSIVE === */
+    @media (min-width: 768px) {
+      .badge-container {
+        font-size: 1.125rem;
+      }
+
+      .hero-title {
+        font-size: 4.5rem;
+        min-height: 6rem;
+      }
+
+      .hero-description {
+        font-size: 1.5rem;
+      }
+
+      .avatar-image {
+        width: 20rem;
+        height: 20rem;
+      }
+
+      .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .content-text-wrapper {
+        text-align: left;
+      }
+
+      .order-1 {
+        order: 1;
+      }
+
+      .order-2 {
+        order: 2;
+      }
+
+      .section-title {
+        font-size: 4rem;
+      }
+
+      .section-description {
+        font-size: 1.5rem;
+      }
+
+      .cta-title {
+        font-size: 4rem;
+      }
+
+      .cta-description {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-title {
+        font-size: 6rem;
+        min-height: 8rem;
+      }
+
+      .avatar-image {
+        width: 24rem;
+        height: 24rem;
+      }
+
+      .section-title {
+        font-size: 4.5rem;
+      }
+
+      .cta-title {
+        font-size: 4.5rem;
+      }
+    }
+  </style>
 </Layout>

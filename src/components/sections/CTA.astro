@@ -1,0 +1,128 @@
+---
+import Button from '../ui/Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  buttonText?: string;
+  buttonHref?: string;
+  buttonIcon?: string;
+  secondaryButtonText?: string;
+  secondaryButtonHref?: string;
+  secondaryButtonIcon?: string;
+  label?: string;
+}
+
+const { 
+  title, 
+  description, 
+  buttonText,
+  buttonHref,
+  buttonIcon = 'message',
+  secondaryButtonText,
+  secondaryButtonHref,
+  secondaryButtonIcon = 'rocket',
+  label
+} = Astro.props;
+---
+
+<section class="cta-section scroll-reveal">
+  <div class="container mx-auto max-w-4xl text-center px-6">
+    {label && <div class="cta-label">{label}</div>}
+    
+    <h2 class="cta-title gradient-text">
+      {title}
+    </h2>
+    
+    <p class="cta-description">
+      {description}
+    </p>
+    
+    {(buttonText || secondaryButtonText || Astro.slots.has('default')) && (
+      <div class="cta-buttons">
+        {buttonText && buttonHref && (
+          <Button 
+            href={buttonHref}
+            variant="primary"
+            size="large"
+            icon={buttonIcon}
+          >
+            {buttonText}
+          </Button>
+        )}
+        
+        {secondaryButtonText && secondaryButtonHref && (
+          <Button 
+            href={secondaryButtonHref}
+            variant="outline"
+            size="large"
+            icon={secondaryButtonIcon}
+          >
+            {secondaryButtonText}
+          </Button>
+        )}
+        
+        <slot />
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .cta-label {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-principal);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  .cta-description {
+    color: var(--color-texto);
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .cta-title {
+      font-size: 4rem;
+    }
+
+    .cta-description {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .cta-title {
+      font-size: 4.5rem;
+    }
+  }
+</style>

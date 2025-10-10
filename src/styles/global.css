@@ -1,0 +1,456 @@
+@import "tailwindcss";
+
+/* ============================================
+   FUENTES
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   VARIABLES GLOBALES
+   ============================================ */
+:root {
+  /* Colores principales */
+  --color-principal: #b0e0a8;
+  --color-secundario: #9ae6b4;
+  --color-acento: #225034;
+  --color-borde: #6ac495;
+  --color-fondo: #00150f;
+  --color-texto: #9cbf9f;
+  --color-base: #000000;
+  --color-blanco: #ffffff;
+  --color-rojo: #ff0000;
+  --color-rojo-oscuro: #cc0000;
+  
+  /* Selección de texto */
+  --selection-bg: #b0e0a8;
+  --selection-text: #001b14;
+}
+
+/* ============================================
+   ESTILOS BASE
+   ============================================ */
+body {
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: white;
+  background-color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+[aria-current="page"] {
+  color: var(--color-principal);
+  font-weight: 600;
+}
+
+/* ============================================
+   BOTONES - Sistema de componentes
+   ============================================ */
+.btn-em {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: black;
+  background-color: var(--color-principal);
+  border: 2px solid var(--color-principal);
+  border-radius: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-em:hover {
+  background-color: var(--color-rojo);
+  border-color: var(--color-rojo);
+  color: white;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+  transform: scale(1.05);
+}
+
+.btn-em:focus {
+  outline: 2px solid var(--color-principal);
+  outline-offset: 2px;
+}
+
+.btn-em::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-em:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-outline-em {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-principal);
+  background-color: transparent;
+  border: 2px solid var(--color-principal);
+  border-radius: 9999px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-outline-em:hover {
+  color: white;
+  border-color: var(--color-rojo);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+  transform: scale(1.05);
+}
+
+.btn-outline-em:focus {
+  outline: 2px solid var(--color-rojo);
+  outline-offset: 2px;
+}
+
+.btn-outline-em::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: var(--color-rojo);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+  z-index: -1;
+}
+
+.btn-outline-em:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btn-large {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+/* ============================================
+   EFECTOS VISUALES
+   ============================================ */
+
+/* Gradiente animado */
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-principal),
+    var(--color-secundario),
+    var(--color-borde),
+    #ff6b6b,
+    var(--color-rojo),
+    var(--color-principal)
+  );
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Efecto CRT */
+.crt {
+  position: relative;
+  background-color: black;
+}
+
+.crt::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    rgba(0, 255, 195, 0.02),
+    rgba(0, 255, 195, 0.02) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Glitch effect */
+.glitch {
+  position: relative;
+}
+
+.glitch:hover::before,
+.glitch:hover::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch:hover::before {
+  animation: glitch-1 0.3s infinite;
+  color: var(--color-rojo);
+  z-index: -1;
+}
+
+.glitch:hover::after {
+  animation: glitch-2 0.3s infinite;
+  color: #0ff;
+  z-index: -2;
+}
+
+@keyframes glitch-1 {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-2 {
+  0% { transform: translate(0); }
+  20% { transform: translate(2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(-2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+/* ============================================
+   PARTÍCULAS FLOTANTES
+   ============================================ */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--color-principal);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   TECH TAGS
+   ============================================ */
+.tech-tag {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-principal);
+  background-color: rgba(176, 224, 168, 0.1);
+  border: 1px solid rgba(176, 224, 168, 0.3);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.tech-tag:hover {
+  background-color: var(--color-rojo);
+  border-color: var(--color-rojo);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease, transform 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   ANIMACIONES
+   ============================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out both;
+}
+
+/* Delays para animaciones escalonadas */
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+
+/* Efecto Typewriter */
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--color-rojo);
+  animation: 
+    typing 3s steps(30) 0.5s forwards,
+    blink 0.75s step-end infinite;
+  max-width: 0;
+}
+
+@keyframes typing {
+  from {
+    max-width: 0;
+  }
+  to {
+    max-width: 100%;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-rojo);
+  }
+}
+
+.typewriter-done {
+  border-right: none;
+  animation: none;
+  max-width: 100%;
+}
+
+/* ============================================
+   SCROLLBAR PERSONALIZADO
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(106, 196, 149, 0.5);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-principal);
+}
+
+/* ============================================
+   ACCESIBILIDAD
+   ============================================ */
+*:focus-visible {
+  outline: 2px solid var(--color-principal);
+  outline-offset: 2px;
+}
+
+/* Prevenir scroll cuando menu está abierto */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ============================================
+   UTILIDADES GLOBALES
+   ============================================ */
+.border-accent {
+  border-color: var(--color-acento);
+}
+
+.glow-red {
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.glow-red-strong {
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5), 0 0 60px rgba(255, 0, 0, 0.3);
+  animation: pulseRed 2s ease-in-out infinite;
+}
+
+@keyframes pulseRed {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.6), 0 0 80px rgba(255, 0, 0, 0.4);
+  }
+}
+
+/* ============================================
+   RESPONSIVE - BREAKPOINTS
+   ============================================ */
+@media (min-width: 768px) {
+  .tech-tag {
+    font-size: 1.125rem;
+  }
+}

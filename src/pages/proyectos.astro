@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Particles from "../components/effects/Particles.astro";
+import Hero from "../components/sections/Hero.astro";
+import ProjectCard from "../components/ui/ProjectCard.astro";
+import CTA from "../components/sections/CTA.astro";
+
+const proyectos = [
+  {
+    id: 1,
+    titulo: "Landing Pastelería Tartufo",
+    subtitulo: "Experiencia digital dulce",
+    descripcion: "Diseño web elegante y moderno para una pastelería artesanal. Creando una experiencia visual que refleja la delicadeza y calidad de sus productos, con una interfaz intuitiva que facilita la navegación y destaca cada creación.",
+    imagen: "/img/tartufo.png",
+    tags: ["HTML5", "CSS3", "JavaScript", "Responsive"],
+    categoria: "Web Development",
+    año: "2024"
+  },
+  {
+    id: 2,
+    titulo: "Temperature Tracker",
+    subtitulo: "Dashboard climático en tiempo real",
+    descripcion: "Aplicación web interactiva que consume APIs meteorológicas para mostrar datos climáticos actualizados. Visualización de datos elegante con gráficos dinámicos, pronósticos detallados y una interfaz minimalista que prioriza la información esencial.",
+    imagen: "/img/TempTracker.png",
+    tags: ["API Integration", "JavaScript", "Data Visualization"],
+    categoria: "Web Application",
+    año: "2024"
+  },
+  {
+    id: 3,
+    titulo: "Task Management System",
+    subtitulo: "Productividad simplificada",
+    descripcion: "Sistema de gestión de tareas con backend en Python y frontend dinámico. Permite organizar proyectos, establecer prioridades y hacer seguimiento del progreso. Una solución completa para mantener el control de tus objetivos diarios.",
+    imagen: "/img/Tracker de Tareas.png",
+    tags: ["Python", "Flask", "SQLite", "JavaScript"],
+    categoria: "Full Stack",
+    año: "2024"
+  },
+  {
+    id: 4,
+    titulo: "InfoSystem App",
+    subtitulo: "Conocimiento en tu bolsillo",
+    descripcion: "Aplicación móvil educativa desarrollada en AppInventor con arquitectura en la nube usando Firebase. Proporciona acceso rápido a información sobre teoría de sistemas con una interfaz intuitiva diseñada para el aprendizaje móvil.",
+    imagen: "/img/InfoSystem.jpg",
+    tags: ["AppInventor", "Firebase", "Cloud Database"],
+    categoria: "Mobile Development",
+    año: "2023"
+  },
+  {
+    id: 5,
+    titulo: "Reciclethics",
+    subtitulo: "Diseño para un futuro sostenible",
+    descripcion: "Aplicación móvil conceptual diseñada en Figma que promueve el reciclaje inteligente. Sistema de gestión de residuos que ayuda a los usuarios a identificar contenedores correctos, reducir su huella de carbono y contribuir al cuidado del medio ambiente.",
+    imagen: "/img/Reciclethics.png",
+    tags: ["Figma", "UX/UI Design", "Prototyping"],
+    categoria: "Product Design",
+    año: "2023"
+  }
+];
+---
+
+<Layout 
+  title="Proyectos | Portafolio LCM"
+  description="Portfolio de proyectos: desarrollo web, aplicaciones móviles y diseño UX/UI. Soluciones digitales creadas con pasión y tecnología moderna."
+>
+  <Particles />
+
+  <Hero 
+    title="Proyectos Destacados"
+    description="Una colección de trabajos que representan mi evolución como desarrollador. Cada proyecto es un desafío superado, una tecnología dominada, una idea materializada."
+    showScrollIndicator={true}
+    size="large"
+  />
+
+  {proyectos.map((proyecto, index) => (
+    <ProjectCard {...proyecto} reverse={index % 2 !== 0} />
+  ))}
+
+  <CTA 
+    title="Creemos algo juntos"
+    description="Cada proyecto es una oportunidad para innovar. Si tienes una idea, un desafío o simplemente quieres conversar sobre tecnología, estoy disponible."
+    buttonText="Iniciar conversación"
+    buttonHref="/contacto"
+    buttonIcon="send"
+    label="¿Siguiente?"
+  />
+</Layout>

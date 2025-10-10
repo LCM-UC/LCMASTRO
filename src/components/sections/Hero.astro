@@ -1,0 +1,125 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  showScrollIndicator?: boolean;
+  align?: 'left' | 'center';
+  size?: 'normal' | 'large';
+}
+
+const { 
+  title, 
+  description, 
+  showScrollIndicator = false,
+  align = 'center',
+  size = 'normal'
+} = Astro.props;
+
+const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+const sizeClass = size === 'large' ? 'hero-large' : '';
+---
+
+<section class={`hero-section ${sizeClass} scroll-reveal`}>
+  <div class="container mx-auto max-w-7xl px-6">
+    <div class={`hero-content ${alignClass}`}>
+      <h1 class="hero-title gradient-text">
+        {title}
+      </h1>
+      <p class="hero-description">
+        {description}
+      </p>
+      <slot />
+    </div>
+    
+    {showScrollIndicator && (
+      <div class="scroll-indicator" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"/>
+          <path d="m19 12-7 7-7-7"/>
+        </svg>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    padding: 8rem 0 4rem;
+  }
+
+  .hero-section.hero-large {
+    min-height: 100vh;
+  }
+
+  .hero-content {
+    max-width: 56rem;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.4s forwards;
+  }
+
+  .hero-description {
+    color: var(--color-texto);
+    font-size: 1.25rem;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.6s forwards;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    color: var(--color-principal);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(10px);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: 4.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: 5rem;
+    }
+  }
+</style>

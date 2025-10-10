@@ -1,0 +1,154 @@
+---
+interface Props {
+  periodo: string;
+  titulo: string;
+  institucion: string;
+  descripcion: string;
+  logros: string[];
+  techs: string[];
+  isLast?: boolean;
+}
+
+const { 
+  periodo, 
+  titulo, 
+  institucion, 
+  descripcion, 
+  logros, 
+  techs,
+  isLast = false 
+} = Astro.props;
+---
+
+<article class={`timeline-item ${isLast ? 'last-item' : ''}`}>
+  <div class="timeline-marker"></div>
+  <div class="timeline-content">
+    <div class="timeline-header">
+      <span class="timeline-period">{periodo}</span>
+      <h3 class="timeline-title">{titulo}</h3>
+      <p class="timeline-institution">{institucion}</p>
+    </div>
+    <p class="timeline-description">
+      {descripcion}
+    </p>
+    <ul class="timeline-achievements">
+      {logros.map((logro) => (
+        <li>{logro}</li>
+      ))}
+    </ul>
+    <div class="timeline-techs">
+      {techs.map((tech) => (
+        <span class="tech-badge">{tech}</span>
+      ))}
+    </div>
+  </div>
+</article>
+
+<style>
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(176, 224, 168, 0.1);
+  }
+
+  .timeline-item.last-item {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--color-principal);
+    border: 3px solid var(--color-base);
+    box-shadow: 0 0 0 3px var(--color-principal);
+  }
+
+  .timeline-header {
+    margin-bottom: 1rem;
+  }
+
+  .timeline-period {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-principal);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0.5rem 0;
+  }
+
+  .timeline-institution {
+    color: var(--color-secundario);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .timeline-description {
+    color: var(--color-texto);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 1rem 0;
+  }
+
+  .timeline-achievements {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+  }
+
+  .timeline-achievements li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--color-texto);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-achievements li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--color-principal);
+    font-size: 1.25rem;
+  }
+
+  .timeline-techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .tech-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-principal);
+    background-color: rgba(176, 224, 168, 0.1);
+    border: 1px solid rgba(176, 224, 168, 0.3);
+    border-radius: 0.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .tech-badge:hover {
+    background-color: var(--color-rojo);
+    border-color: var(--color-rojo);
+    color: white;
+    transform: scale(1.05);
+  }
+</style>
